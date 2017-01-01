@@ -25,7 +25,6 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-//    compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-starter-actuator")
     compile("org.springframework.boot:spring-boot-devtools")
@@ -50,5 +49,15 @@ idea {
     module {
         inheritOutputDirs = false
         outputDir = file("$buildDir/classes/main/")
+    }
+}
+
+task updatePublicFiles(type:Exec) {
+    workingDir "ui"
+    commandLine "./updatePublicFilesInApp.sh"
+
+    standardOutput = new ByteArrayOutputStream()
+    ext.output = {
+        return standardOutput.toString()
     }
 }
