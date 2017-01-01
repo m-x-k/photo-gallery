@@ -2,4 +2,4 @@ server:
     port: 8081
 
 photos:
-    folder: /opt/mxkphotography/photos/
+    folder: /opt/gallery/photos/
