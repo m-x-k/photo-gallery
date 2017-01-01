@@ -1,7 +1,7 @@
 {
-  "name": "reacthelloworld",
+  "name": "photo-gallery-ui",
   "version": "1.0.0",
-  "description": "hello world app using react",
+  "description": "photo gallery ui",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --hot"
