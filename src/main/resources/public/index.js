@@ -21482,7 +21482,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -21508,52 +21508,60 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var DisplayPhotos = function (_React$Component) {
-	  _inherits(DisplayPhotos, _React$Component);
+	    _inherits(DisplayPhotos, _React$Component);
 
-	  function DisplayPhotos() {
-	    _classCallCheck(this, DisplayPhotos);
+	    function DisplayPhotos() {
+	        _classCallCheck(this, DisplayPhotos);
 
-	    var _this = _possibleConstructorReturn(this, (DisplayPhotos.__proto__ || Object.getPrototypeOf(DisplayPhotos)).call(this));
+	        var _this = _possibleConstructorReturn(this, (DisplayPhotos.__proto__ || Object.getPrototypeOf(DisplayPhotos)).call(this));
 
-	    _this.getPhotos(_this);
-	    return _this;
-	  }
-
-	  _createClass(DisplayPhotos, [{
-	    key: 'getPhotos',
-	    value: function getPhotos() {
-	      _jquery2.default.ajax({
-	        async: false,
-	        url: 'http://localhost:8081/photo/list',
-	        dataType: 'json',
-	        cache: false,
-	        success: function (data) {
-	          this.photos = [];
-	          var i = 0,
-	              photo,
-	              photos = data;
-	          while (photo = photos[i++]) {
-	            this.photos.push(this.displayPhoto(photo));
-	          }
-	        }.bind(this),
-	        error: function (xhr, status, err) {
-	          console.error(status, err.toString());
-	        }.bind(this)
-	      });
+	        _this.getPhotos(_this);
+	        return _this;
 	    }
-	  }, {
-	    key: 'displayPhoto',
-	    value: function displayPhoto(photo) {
-	      return { src: photo.url, width: 100, height: 100, aspectRatio: 1, lightboxImage: { src: photo.url, caption: photo.caption } };
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(_reactPhotoGallery2.default, { photos: this.photos });
-	    }
-	  }]);
 
-	  return DisplayPhotos;
+	    _createClass(DisplayPhotos, [{
+	        key: 'getUrl',
+	        value: function getUrl(path) {
+	            if (false) return APP_URL + path;
+
+	            return window.location.href + path;
+	        }
+	    }, {
+	        key: 'getPhotos',
+	        value: function getPhotos() {
+	            _jquery2.default.ajax({
+	                async: false,
+	                url: this.getUrl('/photo/list'),
+	                dataType: 'json',
+	                cache: false,
+	                success: function (data) {
+	                    this.photos = [];
+	                    var i = 0,
+	                        photo,
+	                        photos = data;
+	                    while (photo = photos[i++]) {
+	                        this.photos.push(this.displayPhoto(photo));
+	                    }
+	                }.bind(this),
+	                error: function (xhr, status, err) {
+	                    console.error(status, err.toString());
+	                }.bind(this)
+	            });
+	        }
+	    }, {
+	        key: 'displayPhoto',
+	        value: function displayPhoto(photo) {
+	            var url = this.getUrl(photo.url);
+	            return { src: url, width: 100, height: 100, aspectRatio: 1, lightboxImage: { src: url, caption: photo.caption } };
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(_reactPhotoGallery2.default, { photos: this.photos });
+	        }
+	    }]);
+
+	    return DisplayPhotos;
 	}(_react2.default.Component);
 
 	exports.default = DisplayPhotos;

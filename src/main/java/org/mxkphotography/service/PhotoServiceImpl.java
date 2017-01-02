@@ -12,7 +12,10 @@ import java.util.List;
 public class PhotoServiceImpl implements PhotoService {
 
     @Value("${photos.folder}")
-    private String photosFolder = "/opt/mxkphotography/photos/";
+    private String photosFolder;
+
+    @Value("${photos.caption}")
+    private String caption;
 
     @Override
     public List<Photo> getPhotoList() {
@@ -21,7 +24,7 @@ public class PhotoServiceImpl implements PhotoService {
         if (folder.isDirectory() && folder.canRead()) {
             for (File file : folder.listFiles()) {
                 String name = file.getName();
-                photoList.add(new Photo(name, "http://localhost:8081/photo/" + name, "100", "100", "1", "MXK Photos"));
+                photoList.add(new Photo(name, "/photo/" + name, "100", "100", "1", caption));
             }
         }
 

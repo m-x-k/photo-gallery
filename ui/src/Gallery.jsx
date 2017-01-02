@@ -8,10 +8,17 @@ export default class DisplayPhotos extends React.Component {
 		this.getPhotos(this);
 	};
 
-	getPhotos() {
+    getUrl(path) {
+        if (DEV_MODE)
+            return APP_URL + path;
+
+        return window.location.href + path
+    }
+
+    getPhotos() {
         $.ajax({
           async:false,
-          url: 'http://localhost:8081/photo/list',
+          url: this.getUrl('/photo/list'),
           dataType: 'json',
           cache: false,
           success: function(data) {
@@ -28,7 +35,8 @@ export default class DisplayPhotos extends React.Component {
 	}
 
 	displayPhoto(photo) {
-         return {src: photo.url, width: 100, height: 100, aspectRatio: 1, lightboxImage: { src: photo.url, caption: photo.caption}};		
+        let url = this.getUrl(photo.url);
+        return {src: url, width: 100, height: 100, aspectRatio: 1, lightboxImage: { src: url, caption: photo.caption}};
 	}
 
     render() {

@@ -1,3 +1,5 @@
+var webpack = require('webpack');
+
 var config = {
    entry: './main.js',
 	
@@ -10,6 +12,13 @@ var config = {
       inline: true,
       port: 8080
    },
+
+   plugins: [
+      new webpack.DefinePlugin({
+         'DEV_MODE': false,
+         'APP_URL': JSON.stringify("http://192.168.99.100:8081/")
+      })
+   ],
 	
    module: {
       loaders: [

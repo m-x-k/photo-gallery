@@ -3,3 +3,4 @@ server:
 
 photos:
     folder: /opt/gallery/photos/
+    caption: MXK Photos
