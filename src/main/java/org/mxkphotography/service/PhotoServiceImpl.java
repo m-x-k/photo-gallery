@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PhotoServiceImpl implements PhotoService {
@@ -19,16 +21,32 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Override
     public List<Photo> getPhotoList() {
-        List<Photo> photoList = new ArrayList<>();
-        File folder = new File(photosFolder);
-        if (folder.isDirectory() && folder.canRead()) {
-            for (File file : folder.listFiles()) {
-                String name = file.getName();
-                photoList.add(new Photo(name, "/photo/" + name, "100", "100", "1", caption));
-            }
+        File folder = getPhotosFolder(photosFolder);
+        if (canReadDirectory(folder)) {
+            return getPhotoList(folder);
         }
 
-        return photoList;
+        throw new RuntimeException("Unable to access photos");
+    }
+
+    private boolean canReadDirectory(File folder) {
+        return folder.isDirectory() && folder.canRead();
+    }
+
+    private List<Photo> getPhotoList(File folder) {
+        File[] files = folder.listFiles();
+        if (files == null)
+            return new ArrayList<>();
+
+        return Arrays.stream(files)
+                .map(File::getName)
+                .filter(file -> file.endsWith("jpg"))
+                .map(name -> new Photo(name, "/photo/" + name, "100", "100", "1", caption))
+                .collect(Collectors.toList());
+    }
+
+    private File getPhotosFolder(String photosFolder) {
+        return new File(photosFolder);
     }
 
     @Override
