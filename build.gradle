@@ -64,12 +64,6 @@ task updatePublicFiles(type:Exec) {
 }
 
 
-test {
-    jacoco {
-        excludes = ["*models*"]
-    }
-}
-
 jacocoTestReport {
     afterEvaluate {
         classDirectories = files(classDirectories.files.collect {
