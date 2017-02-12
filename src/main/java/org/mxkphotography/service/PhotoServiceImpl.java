@@ -35,7 +35,7 @@ public class PhotoServiceImpl implements PhotoService {
 
     private List<Photo> getPhotoList(File folder) {
         File[] files = folder.listFiles();
-        if (files == null)
+        if (files == null || files.length == 0)
             return new ArrayList<>();
 
         return Arrays.stream(files)
@@ -51,6 +51,7 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Override
     public File getPhoto(String filename) {
-        return new File(photosFolder + filename + ".jpg");
+        String location = String.format("%s/%s%s", photosFolder, filename, ".jpg");
+        return new File(location);
     }
 }

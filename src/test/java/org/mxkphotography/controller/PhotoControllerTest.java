@@ -73,4 +73,17 @@ public class PhotoControllerTest {
         assertEquals(expectedBytes, bytes);
     }
 
+    @Test
+    public void photo() {
+        Photo photo = new Photo("name", "url", "height", "length", "aspectRatio", "caption");
+        assertEquals(photo.getAspectRatio(), "aspectRatio");
+        assertEquals(photo.getCaption(), "caption");
+        assertEquals(photo.getHeight(), "height");
+        assertEquals(photo.getLength(), "length");
+        assertEquals(photo.getName(), "name");
+        assertEquals(photo.getUrl(), "url");
+
+        assertEquals(photo, photo);
+    }
+
 }
