@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/m-x-k/photo-gallery.svg?branch=master)](https://travis-ci.org/m-x-k/photo-gallery)
+[![codecov](https://codecov.io/gh/m-x-k/photo-gallery/branch/master/graph/badge.svg)](https://codecov.io/gh/m-x-k/photo-gallery)
+
 # Responsive Photo Gallery
 
 Responsive web photo gallery designed to work on mobiles, tablets etc ...
