@@ -71,6 +71,12 @@ test {
 }
 
 jacocoTestReport {
+    afterEvaluate {
+        classDirectories = files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: 'com/mxkphotography/models/**')
+        })
+    }
+
     reports {
         xml.enabled true
         xml.destination "${buildDir}/reports/jacoco/report.xml"
