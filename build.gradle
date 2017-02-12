@@ -2,6 +2,7 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'spring-boot'
+apply plugin: 'jacoco'
 
 buildscript {
     repositories {
@@ -59,5 +60,14 @@ task updatePublicFiles(type:Exec) {
     standardOutput = new ByteArrayOutputStream()
     ext.output = {
         return standardOutput.toString()
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        xml.destination "${buildDir}/reports/jacoco/report.xml"
+        html.enabled false
+        csv.enabled false
     }
 }
