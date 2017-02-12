@@ -63,6 +63,13 @@ task updatePublicFiles(type:Exec) {
     }
 }
 
+
+test {
+    jacoco {
+        excludes = ["*models*"]
+    }
+}
+
 jacocoTestReport {
     reports {
         xml.enabled true

@@ -16,7 +16,8 @@ public class ApplicationTest {
     @Test
     public void main() throws Exception {
         PowerMockito.mockStatic(SpringApplication.class);
-        Application.main(new String[0]);
+        Application application = new Application();
+        application.main(new String[0]);
     }
 
 }

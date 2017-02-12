@@ -11,7 +11,8 @@ public class FileUtilsTest {
     public void getBytes() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
         String file = classLoader.getResource("photos/stairs.jpg").getFile();
-        byte[] bytes = FileUtils.getBytes(new File(file));
+        FileUtils fileUtils = new FileUtils();
+        byte[] bytes = fileUtils.getBytes(new File(file));
         assertNotNull(bytes);
     }
 
