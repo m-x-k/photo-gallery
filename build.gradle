@@ -67,7 +67,7 @@ task updatePublicFiles(type:Exec) {
 jacocoTestReport {
     afterEvaluate {
         classDirectories = files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: 'com/mxkphotography/models/**')
+            fileTree(dir: it, exclude: 'org/mxkphotography/models/**')
         })
     }
 
