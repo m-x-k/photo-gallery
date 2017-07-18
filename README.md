@@ -5,7 +5,7 @@
 
 Responsive web photo gallery designed to work on mobiles, tablets etc ...
 
-To add content just add '*.jpg' photos to '/opt/gallery/photos/'.
+To add content just add '*.jpg' photos to '/app/photos/'.
 
 ## Sub-folders
 * src/: spring boot application code
@@ -25,11 +25,25 @@ To add content just add '*.jpg' photos to '/opt/gallery/photos/'.
 
 ```./gradlew cleanIdea idea```
 
-### Run the application
+### Run
 
-```./gradlew bootRun```
+#### Run locally
+
+```PORT=8081 ./gradlew bootRun```
 
 In a browser go to `http://localhost:8081/`.
+
+#### Run remotely via heroku
+
+Assuming you have a heroku account you can setup and remotely deploy the application by running the following:
+```
+heroku login
+heroku create
+git push heroku master
+heroku ps:scale web=1
+heroku open
+heroku logs --tail
+```
 
 ### UI Development
 
