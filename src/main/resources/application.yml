@@ -1,6 +1,6 @@
 server:
-    port: 8081
+    port: ${PORT}
 
 photos:
-    folder: /opt/gallery/photos/
+    folder: /app/photos
     caption: MXK Photos
